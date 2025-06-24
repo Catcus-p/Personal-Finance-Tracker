@@ -1,0 +1,6 @@
+Shirya 2025-04-07 1 Salary 20000.00
+Shirya 2025-05-04 1 Salary/Part-time 50000.00
+Prerana 2024-05-06 2 Transport 500.00
+Prerana 2025-05-09 1 Salary/Part-time 2000.00
+Prerana 2025-05-09 2 Food 200.00
+Money 500.00 1 Pocket 200.00
