@@ -6,7 +6,7 @@
 #define USERFILE "users.txt"
 
 void registerUser() {
-    char username[20];
+    char username[20], password[20];
     FILE *fp = fopen(USERFILE, "a+");
     if (!fp) {
         printf("Unable to open user file.\n");
@@ -16,9 +16,10 @@ void registerUser() {
     printf("Enter new username: ");
     scanf("%s", username);
 
-    char existing[20];
+    // Check if username exists
+    char existing[20], existingPass[20];
     rewind(fp);
-    while (fscanf(fp, "%s", existing) != EOF) {
+    while (fscanf(fp, "%s %s", existing, existingPass) != EOF) {
         if (strcmp(username, existing) == 0) {
             printf("Username already exists.\n");
             fclose(fp);
@@ -26,13 +27,16 @@ void registerUser() {
         }
     }
 
-    fprintf(fp, "%s\n", username);
+    printf("Enter password: ");
+    scanf("%s", password);
+
+    fprintf(fp, "%s %s\n", username, password);
     fclose(fp);
     printf("User registered successfully!\n");
 }
 
 int login(char currentUser[]) {
-    char username[20];
+    char username[20], password[20];
     FILE *fp = fopen(USERFILE, "r");
 
     if (!fp) {
@@ -42,10 +46,12 @@ int login(char currentUser[]) {
 
     printf("Enter username: ");
     scanf("%s", username);
+    printf("Enter password: ");
+    scanf("%s", password);
 
-    char temp[20];
-    while (fscanf(fp, "%s", temp) != EOF) {
-        if (strcmp(temp, username) == 0) {
+    char tempUser[20], tempPass[20];
+    while (fscanf(fp, "%s %s", tempUser, tempPass) != EOF) {
+        if (strcmp(tempUser, username) == 0 && strcmp(tempPass, password) == 0) {
             strcpy(currentUser, username);
             fclose(fp);
             printf("Login successful. Welcome, %s!\n", currentUser);
@@ -53,7 +59,7 @@ int login(char currentUser[]) {
         }
     }
 
-    printf("Login failed. User not found.\n");
+    printf("Login failed. Incorrect username or password.\n");
     fclose(fp);
     return 0;
 }
