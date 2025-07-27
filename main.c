@@ -16,17 +16,23 @@ int main() {
         scanf("%d", &option);
 
         if (option == 1) {
-            if (login(currentUser)) {
-                if (strcmp(currentUser, "admin") == 0)
-                    adminMenu(currentUser);
-                else
-                    menu(currentUser);
+            int result = login(currentUser);
+
+            if (result == 2) {
+                adminMenu(currentUser);
+            } else if (result == 1) {
+                menu(currentUser);
+            } else {
+                printf("Login failed.\n");
             }
+
         } else if (option == 2) {
             registerUser();
+
         } else if (option == 3) {
             printf("Exiting...\n");
             break;
+
         } else {
             printf("Invalid option.\n");
         }

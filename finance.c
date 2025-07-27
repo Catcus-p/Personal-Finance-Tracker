@@ -14,7 +14,7 @@ typedef struct {
     float amount;
 } Transaction;
 
-// Simple date format validation: YYYY-MM-DD
+//  date format validation: YYYY-MM-DD
 int isValidDate(const char *date) {
     if (strlen(date) != 10) return 0;
     if (date[4] != '-' || date[7] != '-') return 0;
@@ -27,7 +27,7 @@ int isValidDate(const char *date) {
     int month = atoi(date + 5);
     int day = atoi(date + 8);
     if (month < 1 || month > 12) return 0;
-    if (day < 1 || day > 31) return 0; // not perfect, but okay for now
+    if (day < 1 || day > 31) return 0; 
     return 1;
 }
 

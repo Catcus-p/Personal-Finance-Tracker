@@ -16,7 +16,6 @@ void registerUser() {
     printf("Enter new username: ");
     scanf("%s", username);
 
-    // Check if username exists
     char existing[20], existingPass[20];
     rewind(fp);
     while (fscanf(fp, "%s %s", existing, existingPass) != EOF) {
@@ -49,6 +48,15 @@ int login(char currentUser[]) {
     printf("Enter password: ");
     scanf("%s", password);
 
+    // Admin login
+    if (strcmp(username, "admin") == 0 && strcmp(password, "admin123") == 0) {
+        strcpy(currentUser, username);
+        fclose(fp);
+        printf("Admin login successful.\n");
+        return 2;
+    }
+
+    // Regular user check
     char tempUser[20], tempPass[20];
     while (fscanf(fp, "%s %s", tempUser, tempPass) != EOF) {
         if (strcmp(tempUser, username) == 0 && strcmp(tempPass, password) == 0) {
@@ -59,7 +67,6 @@ int login(char currentUser[]) {
         }
     }
 
-    printf("Login failed. Incorrect username or password.\n");
     fclose(fp);
     return 0;
 }
